@@ -1,0 +1,1 @@
+psql -U postgres -d world -c 'CREATE DATABASE IF NOT EXISTS world'

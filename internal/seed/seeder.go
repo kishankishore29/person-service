@@ -28,6 +28,7 @@ func LoadRandomPersonData(numberOfRecords int32, databaseHandle *gorm.DB) {
 
 		// Generate a random entry for a new person and append it to the persons array.
 		persons = append(persons, models.Person{
+			Id:      fakeDataGenerator.UUID().V4(),
 			Name:    person.Name(),
 			Age:     fakeDataGenerator.Int32Between(1, 100),
 			Email:   fakeDataGenerator.Internet().Email(),
@@ -39,10 +40,10 @@ func LoadRandomPersonData(numberOfRecords int32, databaseHandle *gorm.DB) {
 	batchSize := numberOfRecords / recordsPerBatch
 
 	// Create entries in the database in batches.
-	err := databaseHandle.CreateInBatches(&persons, int(batchSize))
+	transaction := databaseHandle.CreateInBatches(&persons, int(batchSize))
 
-	if err != nil {
-		log.Println(err)
+	if transaction.Error != nil {
+		log.Println(transaction.Error)
 		log.Fatalln("Unable to create seed data! Check error above for more details!")
 	}
 

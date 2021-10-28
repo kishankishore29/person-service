@@ -1,19 +1,17 @@
 package internal
 
 import (
-	"fmt"
-	"log"
-	"net/http"
+	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
 )
 
+type Server struct {
+	Database *gorm.DB
+	Router   *gin.Engine
+}
+
 func (server *Server) Run(address string) {
-	fmt.Printf("Starting HTTP server on address: %s", address)
 
-	// Start the HTTP server on the passed address.
-	err := http.ListenAndServe(address, server.Router)
-
-	// Check if there was an error while starting the HTTP server.
-	if err != nil {
-		log.Fatal("There was a problem while starting the HTTP server!")
-	}
+	// Run the gin http server
+	server.Router.Run(address)
 }

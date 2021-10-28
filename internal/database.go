@@ -4,23 +4,17 @@ import (
 	"fmt"
 	"person-service/internal/models"
 
-	"github.com/gorilla/mux"
 	"go.uber.org/zap"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
-
-type Server struct {
-	Database *gorm.DB
-	Router   *mux.Router
-}
 
 //InitializeDatabase Connect to the database and apply the migrations. Return the database connection handle.
 func (server *Server) InitializeDatabase(databaseUser, databasePassword, databasePort, databaseHost, databaseName string) {
 
 	logger, _ := zap.NewProduction()
 	var err error
-	
+
 	// Create the database URL using the values passed to the startup function.
 	databaseURL := fmt.Sprintf(
 		"host=%s port=%s user=%s dbname=%s sslmode=disable password=%s",

@@ -13,6 +13,8 @@ type Config struct {
 	DatabasePassword          string `mapstructure:"DATABASE_PASSWORD"`
 	NumberOfTestPersonEntries int    `mapstructure:"NUMBER_OF_TEST_PERSON_ENTRIES"`
 	ShouldSeedData            bool   `mapstructure:"SHOULD_SEED_DATA"`
+	HTTPHost                  string `mapstructure:"HTTP_HOST"`
+	HTTPPort                  string `mapstructure:"HTTP_PORT"`
 }
 
 //LoadConfig Reads the env variables and returns a config struct.
@@ -31,7 +33,7 @@ func LoadConfig(environment string) (config Config, err error) {
 	}
 
 	// Unmarshal the read config to a struct.
-	// Unmarshal indicates conversion of external files to a go struct.
+	// Unmarshal indicates conversion of external formats like JSON to a go struct.
 	// An example of named return.
 	err = viper.Unmarshal(&config)
 	return
@@ -39,6 +41,5 @@ func LoadConfig(environment string) (config Config, err error) {
 
 //getEnvironmentFilePath Returns the relative path to the env file.
 func getEnvironmentFilePath(environment string) string {
-
 	return "./config/env/"
 }

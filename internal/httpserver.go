@@ -5,6 +5,7 @@ import (
 	"gorm.io/gorm"
 )
 
+// Provides the database and the router fields.
 type Server struct {
 	Database *gorm.DB
 	Router   *gin.Engine

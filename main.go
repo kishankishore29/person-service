@@ -41,6 +41,7 @@ func main() {
 	// Register the GET route to the default router.
 	// TODO Create a different fiole for storing the routes called routes.go.
 	server.Router.GET("/v1/world/person/", apiServer.GetPersons)
+	server.Router.POST("/v1/world/person/", apiServer.CreatePerson)
 
 	// Run the HTTP server pasaing the address to it
 	server.Run(configuration.HTTPHost + ":" + configuration.HTTPPort)

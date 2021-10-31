@@ -10,7 +10,7 @@ import (
 )
 
 //InitializeDatabase Connect to the database and apply the migrations. Return the database connection handle.
-func (server *Server) InitializeDatabase(databaseUser, databasePassword, databasePort, databaseHost, databaseName string) {
+func InitializeDatabase(databaseUser, databasePassword, databasePort, databaseHost, databaseName string) *gorm.DB {
 
 	logger, _ := zap.NewProduction()
 	var err error
@@ -21,7 +21,7 @@ func (server *Server) InitializeDatabase(databaseUser, databasePassword, databas
 		databaseHost, databasePort, databaseUser, databaseName, databasePassword)
 
 	// Open a connection to postgres
-	server.Database, err = gorm.Open(postgres.Open(databaseURL))
+	database, err := gorm.Open(postgres.Open(databaseURL))
 
 	// Check if there was an error while opening a connection to the database
 	if err != nil {
@@ -30,5 +30,8 @@ func (server *Server) InitializeDatabase(databaseUser, databasePassword, databas
 	}
 
 	// Apply the migrations to the database.
-	server.Database.Debug().AutoMigrate(&models.Person{})
+	database.Debug().AutoMigrate(&models.Person{})
+
+	// Return the database object
+	return database
 }

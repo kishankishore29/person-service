@@ -7,6 +7,7 @@ import (
 	"go.uber.org/zap"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+	gormLogger "gorm.io/gorm/logger"
 )
 
 //InitializeDatabase Connect to the database and apply the migrations. Return the database connection handle.
@@ -21,7 +22,9 @@ func InitializeDatabase(databaseUser, databasePassword, databasePort, databaseHo
 		databaseHost, databasePort, databaseUser, databaseName, databasePassword)
 
 	// Open a connection to postgres
-	database, err := gorm.Open(postgres.Open(databaseURL))
+	database, err := gorm.Open(postgres.Open(databaseURL), &gorm.Config{
+		Logger: gormLogger.Default.LogMode(gormLogger.Info),
+	})
 
 	// Check if there was an error while opening a connection to the database
 	if err != nil {

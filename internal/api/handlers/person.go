@@ -26,14 +26,14 @@ func (server APIServer) GetPersons(context *gin.Context) {
 
 	// Check if there any error while query the records.
 	if result.Error != nil {
-
 		// Return a 500 Internal server error
 		context.JSON(http.StatusInternalServerError, ApiError{Error: result.Error.Error()})
 		return
 	}
 
-	// Return the serilized response with a 200 OK status code
+	// Return the serialized response with a 200 OK status code
 	context.JSON(http.StatusOK, persons)
+
 }
 
 //createPerson Creates a new record in the person table
@@ -42,7 +42,7 @@ func (server APIServer) CreatePerson(context *gin.Context) {
 	// Create a varialbe of the Person struct type
 	var person models.Person
 
-	// The request body will be unmarshalled to the pesron variable.
+	// The request body will be unmarshalled to the person variable.
 	err := context.BindJSON(&person)
 
 	// Check if there was an error while unmarshalling the JSON request body.
@@ -59,6 +59,8 @@ func (server APIServer) CreatePerson(context *gin.Context) {
 
 		// Return a 500 Internal server error with the appropriate error message.
 		context.JSON(http.StatusInternalServerError, ApiError{Error: result.Error.Error()})
+
+		return
 
 	}
 

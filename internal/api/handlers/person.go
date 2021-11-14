@@ -42,7 +42,7 @@ func (server APIServer) CreatePerson(context *gin.Context) {
 	// Create a varialbe of the Person struct type
 	var person models.Person
 
-	// The request body will be unmarshalled to the pesron variable.
+	// The request body will be unmarshalled to the person variable.
 	err := context.BindJSON(&person)
 
 	// Check if there was an error while unmarshalling the JSON request body.
@@ -59,6 +59,8 @@ func (server APIServer) CreatePerson(context *gin.Context) {
 
 		// Return a 500 Internal server error with the appropriate error message.
 		context.JSON(http.StatusInternalServerError, ApiError{Error: result.Error.Error()})
+
+		return
 
 	}
 

@@ -152,7 +152,7 @@ func (ts *TestSuite) TestCreatePersons() {
 	}
 
 	// Assert that the response was a 200 OK
-	assert.Equal(ts.T(), http.StatusOK, ts.recorder.Code)
+	assert.Equal(ts.T(), http.StatusCreated, ts.recorder.Code)
 
 	// Assert that the expected and actual response is matching
 	assert.True(ts.T(), reflect.DeepEqual(want, got))

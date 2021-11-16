@@ -6,11 +6,11 @@ on:
       - '*'  
   pull_request:
     branches:
-      - '*'
+      - master
 
 jobs:
 
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -19,9 +19,6 @@ jobs:
       uses: actions/setup-go@v2
       with:
         go-version: 1.16
-
-    - name: Build
-      run: go build -v ./...
 
     - name: Test
       run: go test -v ./...

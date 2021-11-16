@@ -6,6 +6,7 @@ require (
 	github.com/DATA-DOG/go-sqlmock v1.5.0
 	github.com/gin-gonic/gin v1.7.4
 	github.com/gofrs/uuid v4.0.0+incompatible
+	github.com/google/uuid v1.1.2
 	github.com/jaswdr/faker v1.8.0
 	github.com/spf13/viper v1.9.0
 	github.com/stretchr/testify v1.7.0

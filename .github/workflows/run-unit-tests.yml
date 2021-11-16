@@ -1,0 +1,14 @@
+name: pull-request
+on:
+  pull_request:
+    branches: [ main ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+      - uses: actions/checkout@v2
+      - name: Set up go 
+        uses: actions/setup-go@v1
+      - name: Run tests 
+        run: go test ./...

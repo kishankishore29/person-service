@@ -13,8 +13,7 @@ type Config struct {
 	DatabasePassword          string `mapstructure:"DATABASE_PASSWORD"`
 	NumberOfTestPersonEntries int    `mapstructure:"NUMBER_OF_TEST_PERSON_ENTRIES"`
 	ShouldSeedData            bool   `mapstructure:"SHOULD_SEED_DATA"`
-	HTTPHost                  string `mapstructure:"HTTP_HOST"`
-	HTTPPort                  string `mapstructure:"HTTP_PORT"`
+	HTTPPort                  string `mapstructure:"PORT"`
 }
 
 //LoadConfig Reads the env variables and returns a config struct.

@@ -47,5 +47,5 @@ func main() {
 	api.AddPersonRoutes(v1Router, apiServer)
 
 	// Start the HTTP server by passing the URL that it needs to start on.
-	router.Run(configuration.HTTPHost + ":" + configuration.HTTPPort)
+	router.Run(":" + configuration.HTTPPort)
 }

@@ -21,7 +21,7 @@ func LoadRandomPersonData(numberOfRecords int32, databaseHandle *gorm.DB) {
 	databaseHandle.Model(&person).Count(&count)
 
 	if count > 0 {
-		log.Println(fmt.Sprintf("Found %d rows already in the database. Not seeding any data!", count))
+		log.Println(fmt.Sprintf("Found %d rows already in the database! Not seeding any data!", count))
 		return
 	}
 

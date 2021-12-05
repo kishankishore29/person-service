@@ -19,7 +19,7 @@ func main() {
 	configuration, err := config.LoadConfig("local")
 
 	if err != nil {
-		logger.Error(fmt.Sprintf("There was a while reading the configuration : %e", err))
+		logger.Error(fmt.Sprintf("There was an error while reading the configuration : %e", err))
 		return
 	}
 
@@ -27,7 +27,7 @@ func main() {
 	database, err := internal.InitializeDatabase(configuration.DatabaseURL)
 
 	if err != nil {
-		logger.Error(fmt.Sprintf("There was a while initializing the database : %e", err))
+		logger.Error(fmt.Sprintf("There was an error while initializing the database : %e", err))
 		return
 	}
 

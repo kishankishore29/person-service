@@ -21,7 +21,7 @@ func InitializeDatabase(url string) (*gorm.DB, error) {
 	parsedURL, err := pq.ParseURL(url)
 
 	if err != nil {
-		logger.Error(fmt.Sprintf("There was a while parsing the postgres URL : %e", err))
+		logger.Error(fmt.Sprintf("There was an error while parsing the postgres URL : %e", err))
 		return nil, err
 	}
 
@@ -32,12 +32,17 @@ func InitializeDatabase(url string) (*gorm.DB, error) {
 
 	// Check if there was an error while opening a connection to the database
 	if err != nil {
-		logger.Error(fmt.Sprintf("There was a while connecting to the database : %e", err))
+		logger.Error(fmt.Sprintf("There was an error while connecting to the database : %e", err))
 		return nil, err
 	}
 
 	// Apply the migrations to the database.
-	database.Debug().AutoMigrate(&models.Person{})
+	err = database.Debug().AutoMigrate(&models.Person{})
+
+	if err != nil {
+		logger.Error(fmt.Sprintf("There was an error while applying migrations : %e", err))
+		return nil, err
+	}
 
 	// Return the database object
 	return database, nil

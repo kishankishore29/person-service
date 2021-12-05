@@ -1,6 +1,7 @@
 package seed
 
 import (
+	"fmt"
 	"log"
 	"person-service/internal/models"
 
@@ -13,6 +14,16 @@ const recordsPerBatch = 100
 
 //LoadRandomPersonData Creates entries in the person table for test usage.
 func LoadRandomPersonData(numberOfRecords int32, databaseHandle *gorm.DB) {
+
+	// We need to seed data only if the person table is completely empty.
+	var person models.Person
+	var count int64
+	databaseHandle.Model(&person).Count(&count)
+
+	if count > 0 {
+		log.Println(fmt.Sprintf("Found %d rows already in the database. Not seeding any data!", count))
+		return
+	}
 
 	// This slice will contain all the Person entries.
 	var persons []models.Person

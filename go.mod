@@ -9,6 +9,7 @@ require (
 	github.com/gofrs/uuid v4.0.0+incompatible
 	github.com/google/uuid v1.1.2
 	github.com/jaswdr/faker v1.8.0
+	github.com/lib/pq v1.10.2
 	github.com/spf13/viper v1.9.0
 	github.com/stretchr/testify v1.7.0
 	go.uber.org/zap v1.17.0

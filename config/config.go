@@ -6,15 +6,10 @@ import (
 
 // This struct will store all the configration related parameters.
 type Config struct {
-	DatabaseHost              string `mapstructure:"DATABASE_HOST"`
-	DatabasePort              string `mapstructure:"DATABASE_PORT"`
-	DatabaseName              string `mapstructure:"DATABASE_NAME"`
-	DatabaseUser              string `mapstructure:"DATABASE_USER"`
-	DatabasePassword          string `mapstructure:"DATABASE_PASSWORD"`
+	DatabaseURL               string `mapstructure:"DATABASE_URL"`
 	NumberOfTestPersonEntries int    `mapstructure:"NUMBER_OF_TEST_PERSON_ENTRIES"`
 	ShouldSeedData            bool   `mapstructure:"SHOULD_SEED_DATA"`
-	HTTPHost                  string `mapstructure:"HTTP_HOST"`
-	HTTPPort                  string `mapstructure:"HTTP_PORT"`
+	HTTPPort                  string `mapstructure:"PORT"`
 }
 
 //LoadConfig Reads the env variables and returns a config struct.

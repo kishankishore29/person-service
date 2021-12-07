@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"person-service/config"
 	"person-service/internal"
 	"person-service/internal/api"
@@ -18,14 +19,17 @@ func main() {
 	configuration, err := config.LoadConfig("local")
 
 	if err != nil {
-		logger.Error("There was a problem while reading the configuration!")
-		logger.Error(err.Error())
+		logger.Error(fmt.Sprintf("There was an error while reading the configuration : %e", err))
 		return
 	}
 
 	// Initialize the database. Pass all the values required. This will also apply the migrations.
-	database := internal.InitializeDatabase(configuration.DatabaseUser, configuration.DatabasePassword,
-		configuration.DatabasePort, configuration.DatabaseHost, configuration.DatabaseName)
+	database, err := internal.InitializeDatabase(configuration.DatabaseURL)
+
+	if err != nil {
+		logger.Error(fmt.Sprintf("There was an error while initializing the database : %e", err))
+		return
+	}
 
 	// Check if data needs to be seeded
 	if configuration.ShouldSeedData {
@@ -47,5 +51,5 @@ func main() {
 	api.AddPersonRoutes(v1Router, apiServer)
 
 	// Start the HTTP server by passing the URL that it needs to start on.
-	router.Run(configuration.HTTPHost + ":" + configuration.HTTPPort)
+	router.Run(":" + configuration.HTTPPort)
 }
